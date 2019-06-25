@@ -3,9 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", function(e){
       e.preventDefault()
       const task = document.querySelector("#new-task-description").value
+      const dueDate = document.querySelector("#due_date").value
+
+
         const priority_list = document.querySelector("#priority")
         const li = document.createElement("li")
-          li.innerHTML = task
+          li.innerHTML = task + ":" + dueDate
 
           if (priority_list.value === "High"){
             li.style.color = "red"
@@ -18,23 +21,30 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
 
-
       const ul = document.querySelector("#tasks")
         ul.appendChild(li)
       const button = document.createElement("button")
         button.innerHTML = "X"
-      const idSelector = task.split(' ').join('_')
-        button.id = idSelector
+      const edit_button = document.createElement("button")
+        edit_button.innerHTML = "Edit"
+      // const idSelector = task.split(' ').join('_')
+      //   button.id = idSelector
         li.appendChild(button)
-        const done = document.querySelector(`#${idSelector}`)
+        li.appendChild(edit_button)
+        // const done = document.querySelector(`#${idSelector}`)
 
         button.addEventListener("click", () => {
           li.remove();
         })
 
-          done.addEventListener("click", function(e){
-            e.target.parentElement.remove();
-          });//delete click
+        edit_button.addEventListener("click", () => {
+          li.contentEditable = true;
+        })
+
+
+          // done.addEventListener("click", function(e){
+          //   e.target.parentElement.remove();
+          // });//delete click
 
 
 
